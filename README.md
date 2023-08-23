@@ -9,7 +9,7 @@ Benjamin Franklin is often cited for his structured daily routine, which was out
     12:00 PM – 2:00 PM: "Read or look over my accounts, and dine."
     ... and so on.
 
-Such a planner emphasizes not just tasks, but the allocation of specific time blocks to those tasks. It's a great idea to use this concept for a web app, as it combines task management with time management.
+Such a planner emphasizes not just tasks, but the allocation of specific time blocks to those tasks. The idea is to use this concept for a web app (and eventually a mobile app), as it combines task management with time management.
 
 ## Stack 
 The proof of concept will be mostly front-end with scaffolding for a backend connection, and use Next.js, Typescript, and tailwind-css. Design will be mobile centeric, as there are future plans for a mobile app. MobX State Tree is how the state will be managed, which will work with Next's serverside react functionality to prep for a backend connection to MongoDB or supabase. Possibly GraphQL with Apollo Client. 
