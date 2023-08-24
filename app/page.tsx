@@ -1,8 +1,4 @@
 import React from 'react';
-import { observer } from 'mobx-react-lite';
-import TimeComponent from './components/TimeComponent/TimeComponent';
-import ActivityComponent from './components/ActivityComponent/ActivityComponent';
-import DayPlannerStore from './stores/DayPlannerStore';
 
 export default function Home() {
   return (
@@ -31,7 +27,7 @@ export default function Home() {
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <div>
           <h3>Start</h3>
-         
+    
 
         </div>
  
