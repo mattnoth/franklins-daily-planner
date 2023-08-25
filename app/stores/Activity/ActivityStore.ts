@@ -1,59 +1,64 @@
-import { makeAutoObservable } from "mobx";
+import { types, Instance, SnapshotOut } from "mobx-state-tree";
 
-// Placeholder for TimeRange
-interface TimeRangePlaceholder {
-  start: string;  // Representing start time, e.g., "08:00 AM"
-  end: string;    // Representing end time, e.g., "09:00 AM"
-}
+// Define TimeRange model
+const TimeRange = types.model({
+  start: types.string,
+  end: types.string
+});
 
-class Activity {
-  id: number;
-  name: string;
-  timeRange: TimeRangePlaceholder;
+// Snapshot types
+export type TimeRangeSnapshot = SnapshotOut<typeof TimeRange>;
 
-  constructor(id: number, name: string, timeRange: TimeRangePlaceholder) {
-    this.id = id;
-    this.name = name;
-    this.timeRange = timeRange;
-  }
-}
-
-
-class ActivityStore {
-
-// Activities array is observable, meaning any changes to this array will trigger reactions in the parts of the UI that use it. 
-  activities: Activity[] = [];
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  // Action to add a new activity
-  addActivity(name:string, timeRange: TimeRangePlaceholder) {
-    const id = this.activities.length + 1; 
-    const activity = new Activity(id, name, timeRange)
-    this.activities.push(activity);
-  }
-
-  // Action to remove an activity by its ID
-  removeActivity(id: number) {
-    this.activities = this.activities.filter(activity => activity.id !== id);
-  }
-
-// Action to modify an existing activity
-  modifyActivity(id: number, name?: string, timeRange?: TimeRangePlaceholder) {
-    const activity = this.activities.find(activity => activity.id === id);
-    if (activity) {
-      if (name) activity.name = name;
-      if (timeRange) activity.timeRange = timeRange;
+// Define Activity model
+const Activity = types.model({
+  id: types.number,
+  name: types.string,
+  timeRange: TimeRange
+})
+.actions(self => ({
+  modify(name?: string, timeRange?: TimeRangeSnapshot) {
+    if (name) self.name = name;
+    if (timeRange) {
+      self.timeRange.start = timeRange.start;
+      self.timeRange.end = timeRange.end;
     }
   }
+}));
 
-  // Computed property to get the total number of activities
-  // showcase on  how computed values work in MobX. This value will automatically recompute whenever the activities array changes.
+// Define ActivityStore model
+const ActivityStore = types.model({
+  activities: types.array(Activity)
+})
+.views(self => ({
   get totalActivities() {
-    return this.activities.length;
+    return self.activities.length;
   }
-}
+}))
+.actions(self => ({
+  addActivity(name: string, timeRange: TimeRangeSnapshot) {
+    const id = self.activities.length + 1;
+    self.activities.push({ id, name, timeRange });
+  },
+  removeActivity(id: number) {
+    const index = self.activities.findIndex(activity => activity.id === id);
+    if (index !== -1) {
+      self.activities.splice(index, 1);
+    }
+  },
+  modifyActivity(id: number, name?: string, timeRange?: TimeRangeSnapshot) {
+    const activity = self.activities.find(activity => activity.id === id);
+    if (activity) {
+      activity.modify(name, timeRange);
+    }
+  }
+}));
 
-export const activityStore = new ActivityStore(); 
+// Initial instance
+const activityStore = ActivityStore.create({ activities: [] });
+
+export { activityStore, ActivityStore, Activity, TimeRange };
+
+// If you want to use types elsewhere
+export type IActivityStore = Instance<typeof ActivityStore>;
+export type IActivity = Instance<typeof Activity>;
+export type ITimeRange = Instance<typeof TimeRange>;
