@@ -1,22 +1,29 @@
-import { applySnapshot, Instance } from 'mobx-state-tree';
-import DayPlannerStore from './DayPlannerStore';
+import { createContext } from 'react';
+import { ActivityStore } from './Activity/ActivityStore';  // Ensure correct path
+import { Instance } from 'mobx-state-tree';
 
-let store: Instance<typeof DayPlannerStore> | null = null;
+// Define the type for your store
+export type StoreType = {
+  activityStore: Instance<typeof ActivityStore>;
+};
 
-export function initializeStore(snapshot = null) {
-  // If there's a store instance, and no snapshot is provided, just return the existing store
-  if (store && !snapshot) return store;
+let store: StoreType | undefined;
 
-  // If there's a snapshot, apply it to the current store or create a new store with the snapshot
-  if (snapshot) {
-    if (store) {
-      applySnapshot(store, snapshot);
-      return store;
-    }
-    store = DayPlannerStore.create(snapshot);
-  } else {
-    // If no snapshot is provided, and no store exists, create a new store
-    store = DayPlannerStore.create({ timeSlots: [] });
+export const StoreContext = createContext<StoreType | null>(null);
+
+export function initializeStore(initialData: any = {}): StoreType {
+  // If it's on the server-side, always create a new store
+  if (typeof window === 'undefined') {
+    store = {
+      activityStore: ActivityStore.create(initialData.activityStore || {})
+    };
+  }
+
+  // On the client-side, reuse store if it's already there
+  if (!store) {
+    store = {
+      activityStore: ActivityStore.create(initialData.activityStore || {})
+    };
   }
 
   return store;
