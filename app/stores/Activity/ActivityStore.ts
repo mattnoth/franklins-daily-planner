@@ -1,29 +1,6 @@
-import { types, Instance, SnapshotOut } from "mobx-state-tree";
-
-// Define TimeRange model
-const TimeRange = types.model({
-  start: types.string,
-  end: types.string
-});
-
-// Snapshot types
-export type TimeRangeSnapshot = SnapshotOut<typeof TimeRange>;
-
-// Define Activity model
-const Activity = types.model({
-  id: types.number,
-  name: types.string,
-  timeRange: TimeRange
-})
-.actions(self => ({
-  modify(name?: string, timeRange?: TimeRangeSnapshot) {
-    if (name) self.name = name;
-    if (timeRange) {
-      self.timeRange.start = timeRange.start;
-      self.timeRange.end = timeRange.end;
-    }
-  }
-}));
+import { types, Instance } from "mobx-state-tree";
+import Activity, { ActivitySnapshot } from '../../models/ActivityModel';
+import { TimeRangeSnapshot } from '../../models/TimeRangeModel';
 
 // Define ActivityStore model
 const ActivityStore = types.model({
@@ -56,9 +33,7 @@ const ActivityStore = types.model({
 // Initial instance
 const activityStore = ActivityStore.create({ activities: [] });
 
-export { activityStore, ActivityStore, Activity, TimeRange };
+export { activityStore, ActivityStore };
 
 // If you want to use types elsewhere
 export type IActivityStore = Instance<typeof ActivityStore>;
-export type IActivity = Instance<typeof Activity>;
-export type ITimeRange = Instance<typeof TimeRange>;
