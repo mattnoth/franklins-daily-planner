@@ -1,5 +1,4 @@
-import { createContext } from 'react';
-import { ActivityStore } from './Activity/ActivityStore';  // Ensure correct path
+import { ActivityStore } from './Activity/ActivityStore'; 
 import { Instance } from 'mobx-state-tree';
 
 // Define the type for your store
@@ -8,8 +7,6 @@ export type StoreType = {
 };
 
 let store: StoreType | undefined;
-
-export const StoreContext = createContext<StoreType | null>(null);
 
 export function initializeStore(initialData: any = {}): StoreType {
   // If it's on the server-side, always create a new store
