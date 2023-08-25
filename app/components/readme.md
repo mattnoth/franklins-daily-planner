@@ -1,3 +1,6 @@
+# Fonts 
+Uses google fonts and imports them via next/font/google, exports 
+
 ## `Input` Component
 
 ### Description
@@ -50,3 +53,37 @@ To extend or customize the `Input` component further:
 
 1. **Using HTML Attributes**: Pass in standard HTML input attributes directly. This means you can utilize attributes like `maxLength`, `min`, `max`, and so on, directly without any additional modifications.
 2. **Modifying the Source Code**: Expand the component's interface (`IInput`) in the source code to include additional properties as needed. This method provides more flexibility if you're considering adding custom functionalities or properties.
+
+
+# Input Component
+
+The Input component is a flexible and reusable input field designed to fit seamlessly into various parts of the application. With customization in mind, it has been structured to take both standard input attributes as well as a few specific properties for enhanced usability.
+Properties:
+
+    onValueChange (Function): A callback function that's triggered when the value of the input changes. It returns the current value of the input.
+
+    Type: (value: string | number) => void
+
+    additionalClasses (String, optional): An additional string of CSS classes that can be provided for more specific styling needs. This gets appended to the component's base styles.
+
+    Default: ""
+
+    ...props: The component can accept any standard HTML input attributes like name, id, placeholder, etc. This ensures flexibility and broad usability across the application.
+
+### Usage
+
+``` 
+<Input
+  value="Example"
+  onValueChange={value => console.log(value)}
+  additionalClasses="text-red-500"
+  placeholder="Enter text here..."
+/>
+```
+
+### Implementation
+Memoization: The computedClasses is memoized using the useMemo hook. This ensures that the class string computation is efficient and only recalculates when there's a change in additionalClasses.
+
+    BASE_INPUT_CLASSES: It's a constant string holding base styles for the input. This ensures consistent styling across all instances of the Input component.
+
+This documentation provides an overview of the Input component, detailing its properties, usage, and underlying implementation nuances. It can be placed at the top of the respective file or in a corresponding README.
