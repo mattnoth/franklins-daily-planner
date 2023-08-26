@@ -1,12 +1,12 @@
 import React from 'react';
-
-interface ITimeRange extends React.InputHTMLAttributes<HTMLInputElement> {
-  startTime: string; 
-  endTime: string;
-  onStartTimeChange: (value: string) => void;
-  onEndTimeChange: (value: string) => void;
-  additionalClasses?: string;
-}
+import { ITimeRange } from './ITimeRange';
+// interface ITimeRange extends React.InputHTMLAttributes<HTMLInputElement> {
+//   startTime: string; 
+//   endTime: string;
+//   onStartTimeChange: (value: string) => void;
+//   onEndTimeChange: (value: string) => void;
+//   additionalClasses?: string;
+// }
 
 const BASE_CLASSES = "border rounded-md px-3 py-2 mr-4";
 
