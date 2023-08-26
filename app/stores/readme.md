@@ -41,6 +41,38 @@ Modifies an existing activity.
 - **totalActivities**: Returns the total number of activities in the store.
 
 ---
+### DailyPlannerStore.ts
+
+#### Description
+
+`DailyPlannerStore` is the MobX-State-Tree (MST) model that manages multiple days of activities. Each day is represented by its own `ActivityStore` instance.
+
+#### Model
+
+- `dailyActivities`: A map of `ActivityStores` where the key is a date string and the value is an `ActivityStore` instance.
+
+#### Views
+
+- `totalDays`: A computed view that returns the total number of days (keys) in the `dailyActivities` map.
+
+#### Actions
+
+- `addDay(date: string)`: Adds a new day to `dailyActivities` with a given date string as the key.
+- `removeDay(date: string)`: Removes a day from `dailyActivities` based on the given date string.
+
+#### Initial Instance
+
+An initial instance of the `DailyPlannerStore` is created with an empty `dailyActivities` map.
+
+#### Types
+
+- `IDailyPlannerStore`: Exported type for further use in the project.
+
+#### Interaction with Other Files
+
+`DailyPlannerStore` imports `ActivityStore` to populate each day with its respective activities. This store can be utilized throughout the application for managing daily agendas.
+
+---
 
 ## ClientStoreProvider (`ClientStoreProvider.tsx`)
 
