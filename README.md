@@ -8,32 +8,9 @@ General ToDos 25
 - todo: CRUD on Activity 
 - todo: Days
 
+tsconfig.js not working 
 
-app
-├── components
-│   ├── generic
-│   │   ├── Input
-│   │   │   ├── IInput.ts
-│   │   │   └── Input.tsx
-│   │   └── TimeRangeComponent
-│   │       ├── ITimeRange.ts
-│   │       └── TimeRange.tsx
-│   └── readme.md
-├── favicon.ico
-├── globals.css
-├── layout.tsx
-├── models
-│   ├── ActivityModel.ts
-│   ├── TimeRangeModel.ts
-│   └── readme.md
-├── page.tsx
-├── pages
-└── stores
-    ├── Activity
-    │   └── ActivityStore.ts
-    ├── StoreContext.ts
-    ├── initializeStore.ts
-    └── readme.md
+
 
 Nextjs app for creating a quick and easy daily planner similar to Benjamin's Franklin's famous daily planner. 
 
