@@ -1,7 +1,12 @@
 import React from 'react';
-import TimeRange from '../components/generic/TimeRangeComponent/TimeRange';
-import { Input } from '../components/generic/Input/Input';
+
+import TimeRange from '../../components/generic/TimeRangeComponent/TimeRange';
+import { Input } from '../../components/generic/Input/Input';
 import { mockDailyAgenda } from '@/Data/DailyAgendaMocks';
+import { Button } from '@/app/components/generic/Button/Button';
+
+import ClientStoreProvider from '@/app/stores/ClientStoreProvider';
+
 
 const DailyAgendaView = () => {
   const handleStartTimeChange = (value: string) => {
@@ -35,12 +40,13 @@ const DailyAgendaView = () => {
               onValueChange={handleReflectionChange}
               additionalClasses="some-input-class"
             />
-            <button onClick={() => {/* Edit functionality */}}>Edit</button>
-            <button onClick={() => {/* Delete functionality */}}>Delete</button>
+            <Button label='Placeholder Button' onClick={() => {/* Edit functionality */}}>Edit</Button>
+            <Button label='Placeholder Button' onClick={() => {/* Delete functionality */}}>Delete</Button>
           </li>
         ))}
       </ul>
-      <button onClick={() => {/* Add functionality */}}>Add Activity</button>
+      <Button label='Placeholder Button' onClick={() => {/* Add functionality */}}>Add Activity</Button>
+     
     </div>
   );
 };

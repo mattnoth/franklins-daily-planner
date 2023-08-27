@@ -1,4 +1,11 @@
 import React from 'react';
+import { Button } from './components/generic/Button/Button';
+import { IButton } from './components/generic/Button/IButton';
+import DailyAgendaView from './pages/day';
+import { GetStaticPropsContext } from 'next';
+
+import ClientStoreProvider from '@/app/stores/ClientStoreProvider';
+
 
 export default function Home() {
   return (
@@ -12,6 +19,24 @@ export default function Home() {
           {/* Get started by editing&nbsp; */}
           <code className="font-mono font-bold">APP PAGE HEADER</code>
         </p>
+
+        {/* <Button
+          label="test"
+          variant='primary'
+          size='large'
+          delay={1000}
+          href='/day'
+        ></Button> */}
+        {
+
+          
+            <DailyAgendaView />
+  
+        }
+       
+
+        {/* <Button label='Placeholder Button' href="/day/">Navigate</Button> */}
+
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"

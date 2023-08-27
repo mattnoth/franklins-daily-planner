@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
-interface ITimeRange extends InputHTMLAttributes<HTMLInputElement> {
+export interface ITimeRange extends InputHTMLAttributes<HTMLInputElement> {
   startTime: string; 
   endTime: string;
   onStartTimeChange: (value: string) => void;
