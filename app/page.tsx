@@ -1,13 +1,20 @@
 import React from 'react';
 import { Button } from './components/generic/Button/Button';
 import { IButton } from './components/generic/Button/IButton';
-import DailyAgendaView from './pages/day';
+
 import { GetStaticPropsContext } from 'next';
 
+import { Input } from './components/generic/Input/Input';
+
 import ClientStoreProvider from '@/app/stores/ClientStoreProvider';
+import SpecializedInput from './components/special/SpecializedInput';
 
 
 export default function Home() {
+
+  function testMethod() {
+    console.log("hello")
+  };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {
@@ -29,11 +36,12 @@ export default function Home() {
         ></Button> */}
         {
 
-          
-            <DailyAgendaView />
-  
+          // <DailyAgendaView />
+          <SpecializedInput
+          />
+
         }
-       
+
 
         {/* <Button label='Placeholder Button' href="/day/">Navigate</Button> */}
 

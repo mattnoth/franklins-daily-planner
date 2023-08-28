@@ -1,3 +1,4 @@
+'use client'
 import React, { useMemo, ChangeEvent } from 'react';
 import { IInput } from './IInput';  // Adjust path if needed
 
